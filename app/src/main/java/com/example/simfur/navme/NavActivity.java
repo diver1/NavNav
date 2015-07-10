@@ -8,6 +8,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.View;
 import android.view.MenuItem;
 
 
@@ -63,5 +64,13 @@ public class NavActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void startRoute(View v) {
+        Log.d("Start the route!", "");
+    }
+
+    public void stopRoute(View v) {
+        Log.d("Stop the route!", "");
     }
 }
