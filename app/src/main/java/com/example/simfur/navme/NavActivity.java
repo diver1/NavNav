@@ -27,8 +27,7 @@ public class NavActivity extends ActionBarActivity {
             public void onLocationChanged(Location location) {
                 // Called when a new location is found by the network location provider.
                 Log.d("This is tha latitude: ", Double.toString(location.getLatitude()));
-                //          makeUseOfNewLocation(location);
-
+                performAction(location);
             }
 
             public void onStatusChanged(String provider, int status, Bundle extras) {}
@@ -72,5 +71,9 @@ public class NavActivity extends ActionBarActivity {
 
     public void stopRoute(View v) {
         Log.d("Stop the route!", "");
+    }
+
+    public void performAction(Location location) {
+        Log.d("Action!", "");
     }
 }
