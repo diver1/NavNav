@@ -10,14 +10,17 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.MenuItem;
-
+import android.widget.TextView;
 
 public class NavActivity extends ActionBarActivity {
+    TextView routeText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nav);
+
+        routeText = (TextView)findViewById(R.id.textView);
 
         /* Acquire a reference to the system Location Manager */
         LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
@@ -74,6 +77,6 @@ public class NavActivity extends ActionBarActivity {
     }
 
     public void performAction(Location location) {
-        Log.d("Action!", "");
+        routeText.setText("Sundbyberg Municipality (Sundbybergs kommun or Sundbybergs stad) is a municipality in Stockholm County in east central Sweden, just north of the capital Stockholm. Sundbyberg is wholly within the city of Stockholm and has a 100% urban population.");
     }
 }
