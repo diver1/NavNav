@@ -20,6 +20,7 @@ public class NavActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nav);
 
+        /* Get text view for coordinate information */
         routeText = (TextView)findViewById(R.id.textView);
 
         /* Acquire a reference to the system Location Manager */
@@ -30,7 +31,7 @@ public class NavActivity extends ActionBarActivity {
             public void onLocationChanged(Location location) {
                 // Called when a new location is found by the network location provider.
                 Log.d("This is tha latitude: ", Double.toString(location.getLatitude()));
-                performAction(location);
+                onLocationFound(location);
             }
 
             public void onStatusChanged(String provider, int status, Bundle extras) {}
@@ -76,7 +77,8 @@ public class NavActivity extends ActionBarActivity {
         Log.d("Stop the route!", "");
     }
 
-    public void performAction(Location location) {
+    public void onLocationFound(Location location) {
+        /* Method for action when a matching coordinate is found */
         routeText.setText("Sundbyberg Municipality (Sundbybergs kommun or Sundbybergs stad) is a municipality in Stockholm County in east central Sweden, just north of the capital Stockholm. Sundbyberg is wholly within the city of Stockholm and has a 100% urban population.");
     }
 }
