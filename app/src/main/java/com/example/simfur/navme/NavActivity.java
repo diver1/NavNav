@@ -1,5 +1,7 @@
 package com.example.simfur.navme;
 
+import java.util.List;
+import java.io.IOException;
 import android.content.Context;
 import android.location.Location;
 import android.location.LocationListener;
@@ -14,6 +16,7 @@ import android.widget.TextView;
 
 public class NavActivity extends ActionBarActivity {
     TextView routeText;
+    List<POI> pois;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +48,16 @@ public class NavActivity extends ActionBarActivity {
 	     * to receive location updates */
         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+
+        /* Parse the XML */
+        try {
+            ParseXML parser = new ParseXML();
+            pois = parser.parse(getAssets().open("example.xml"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Log.d("This is the name of the first in list ", pois.get(0).getName());
+        Log.d("This is the name of the second in list ", pois.get(1).getName());
     }
 
     @Override

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+
+<route>
+    <poi>
+        <id>1</id>
+        <name>Happy place</name>
+        <coord lon="-0.12574" lat="51.50853"/>
+    </poi>
+    <poi>
+        <id>2</id>
+        <name>Evil place</name>
+        <coord lon="1.12574" lat="51.50853"/>
+    </poi>
+</route>
