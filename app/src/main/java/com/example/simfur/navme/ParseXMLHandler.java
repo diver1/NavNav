@@ -1,6 +1,5 @@
 package com.example.simfur.navme;
 
-import android.util.Log;
 import java.io.IOException;
 import java.util.List;
 import java.util.ArrayList;
@@ -9,12 +8,12 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 import org.xmlpull.v1.XmlPullParserException;
 
-public class ParseXML {
+public class ParseXMLHandler {
     List<POI> pois;
     private POI poi;
     private String text;
 
-    public ParseXML() {
+    public ParseXMLHandler() {
         pois = new ArrayList<POI>();
     }
 

@@ -51,7 +51,7 @@ public class NavActivity extends ActionBarActivity {
 
         /* Parse the XML */
         try {
-            ParseXML parser = new ParseXML();
+            ParseXMLHandler parser = new ParseXMLHandler();
             pois = parser.parse(getAssets().open("example.xml"));
         } catch (IOException e) {
             e.printStackTrace();
