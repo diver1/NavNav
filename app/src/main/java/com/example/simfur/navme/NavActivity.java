@@ -3,9 +3,11 @@ package com.example.simfur.navme;
 import java.util.List;
 import java.io.IOException;
 import android.content.Context;
+import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.speech.tts.TextToSpeech;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,8 +17,10 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 public class NavActivity extends ActionBarActivity {
-    TextView routeText;
-    List<POI> pois;
+    /* Private variables */
+    private TextView routeText;
+    private List<POI> pois;
+    private RobotSpeaker speaker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +84,27 @@ public class NavActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void checkTTS(){
+        // Check if TTS is available
+        Intent check = new Intent();
+        check.setAction(TextToSpeech.Engine.ACTION_CHECK_TTS_DATA);
+        startActivityForResult(check, 0x1);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // If no TTS is available, tell the user to install one
+        if(requestCode == 0x1){
+            if(resultCode == TextToSpeech.Engine.CHECK_VOICE_DATA_PASS){
+                speaker = new RobotSpeaker(this);
+            }else {
+                Intent install = new Intent();
+                install.setAction(TextToSpeech.Engine.ACTION_INSTALL_TTS_DATA);
+                startActivity(install);
+            }
+        }
     }
 
     public void startRoute(View v) {
