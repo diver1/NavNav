@@ -52,10 +52,17 @@ public class ParseXMLHandler {
                             pois.add(poi);
                         } else if (tagname.equalsIgnoreCase("name")) {
                             poi.setName(text);
+                        } else if (tagname.equalsIgnoreCase("text")) {
+                            poi.setText(text);
+                        } else if (tagname.equalsIgnoreCase("tts")) {
+                            poi.setTts(text);
+                        } else if (tagname.equalsIgnoreCase("coord")) {
+                            poi.setLon(Double.parseDouble(parser.getAttributeValue(null, "lon")));
+                            poi.setLat(Double.parseDouble(parser.getAttributeValue(null, "lat")));
                         } else if (tagname.equalsIgnoreCase("id")) {
                             poi.setId(Integer.parseInt(text));
-                            break;
                         }
+                        break;
 
                     default:
                         break;
