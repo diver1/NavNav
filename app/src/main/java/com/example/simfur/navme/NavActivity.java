@@ -27,6 +27,9 @@ public class NavActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nav);
 
+        /* Check TTS status and create a speaker object */
+        checkTTS();
+
         /* Get text view for coordinate information */
         routeText = (TextView)findViewById(R.id.textView);
 
@@ -62,6 +65,8 @@ public class NavActivity extends ActionBarActivity {
         }
         Log.d("This is the name of the first in list ", pois.get(0).getName());
         Log.d("This is the name of the second in list ", pois.get(1).getName());
+
+        //speaker.speak("HEJHEJ");
     }
 
     @Override
@@ -99,6 +104,7 @@ public class NavActivity extends ActionBarActivity {
         if(requestCode == 0x1){
             if(resultCode == TextToSpeech.Engine.CHECK_VOICE_DATA_PASS){
                 speaker = new RobotSpeaker(this);
+                speaker.allow(true);
             }else {
                 Intent install = new Intent();
                 install.setAction(TextToSpeech.Engine.ACTION_INSTALL_TTS_DATA);
@@ -109,14 +115,17 @@ public class NavActivity extends ActionBarActivity {
 
     public void startRoute(View v) {
         Log.d("Start the route!", "");
+        speaker.speak("Start the route!");
     }
 
     public void stopRoute(View v) {
         Log.d("Stop the route!", "");
+        speaker.speak("Stop the route!");
     }
 
     public void onLocationFound(Location location) {
         /* Method for action when a matching coordinate is found */
         routeText.setText("Sundbyberg Municipality (Sundbybergs kommun or Sundbybergs stad) is a municipality in Stockholm County in east central Sweden, just north of the capital Stockholm. Sundbyberg is wholly within the city of Stockholm and has a 100% urban population.");
+        speaker.speak("Sundbyberg Municipality (Sundbybergs kommun or Sundbybergs stad) is a municipality in Stockholm County in east central Sweden, just north of the capital Stockholm. Sundbyberg is wholly within the city of Stockholm and has a 100% urban population.");
     }
 }
