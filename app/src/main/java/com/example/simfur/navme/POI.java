@@ -4,37 +4,25 @@ public class POI {
     private double lat;
     private double lon;
     private String name;
+    private String text;
+    private String tts;
     private int id;
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    public void setName(String name) {this.name = name; }
+    public String getName() { return this.name; }
 
-    public String getName() {
-        return this.name;
-    }
+    public void setText(String text) { this.text = text; }
+    public String getText() { return this.text; }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    public void setTts(String tts) { this.tts = tts; }
+    public String getTts() { return this.tts; }
 
-    public int getId() {
-        return this.id;
-    }
+    public void setId(int id) { this.id = id; }
+    public int getId() { return this.id; }
 
-    public void setLat(double lat) {
-        this.lat = lat;
-    }
+    public void setLat(double lat) { this.lat = lat; }
+    public double getLat() { return this.lat; }
 
-    public double getLat() {
-        return this.lat;
-    }
-
-    public void setLon(double lon) {
-        this.lon = lon;
-    }
-
-    public double getLon() {
-        return this.lon;
-    }
+    public void setLon(double lon) { this.lon = lon; }
+    public double getLon() { return this.lon; }
 }
