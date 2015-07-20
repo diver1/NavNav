@@ -3,6 +3,7 @@ package com.example.simfur.navme;
 public class POI {
     private double lat;
     private double lon;
+    private int radius;
     private String name;
     private String text;
     private String tts;
@@ -25,4 +26,7 @@ public class POI {
 
     public void setLon(double lon) { this.lon = lon; }
     public double getLon() { return this.lon; }
+
+    public void setRadius(int radius) { this.radius = radius; }
+    public double getRadius() { return this.radius; }
 }

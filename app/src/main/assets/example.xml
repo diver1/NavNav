@@ -6,13 +6,13 @@
         <name>Sundbyberg</name>
         <text>Sundbyberg Municipality (Sundbybergs kommun or Sundbybergs stad) is a municipality in Stockholm County in east central Sweden, just north of the capital Stockholm. Sundbyberg is wholly within the city of Stockholm and has a 100% urban population.</text>
         <tts>Sundbyberg stad is a municipality in Stockholm County in east central Sweden, just north of the capital Stockholm. Sundbyberg is wholly within the city of Stockholm and has a 100% urban population.</tts>
-        <coord lon="-0.12574" lat="51.50853"/>
+        <coord lon="0" lat="51" radius="100"/>
     </poi>
     <poi>
         <id>2</id>
         <name>Evil place</name>
         <text>This is a terrible place!</text>
         <tts>This is a terrible place to be!</tts>
-        <coord lon="1.12574" lat="51.50853"/>
+        <coord lon="1.12574" lat="51.50853" radius="500"/>
     </poi>
 </route>

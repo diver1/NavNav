@@ -59,6 +59,7 @@ public class ParseXMLHandler {
                         } else if (tagname.equalsIgnoreCase("coord")) {
                             poi.setLon(Double.parseDouble(parser.getAttributeValue(null, "lon")));
                             poi.setLat(Double.parseDouble(parser.getAttributeValue(null, "lat")));
+                            poi.setRadius(Integer.parseInt(parser.getAttributeValue(null, "radius")));
                         } else if (tagname.equalsIgnoreCase("id")) {
                             poi.setId(Integer.parseInt(text));
                         }
