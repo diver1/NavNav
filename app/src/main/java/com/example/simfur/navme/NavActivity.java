@@ -45,7 +45,7 @@ public class NavActivity extends ActionBarActivity {
                 /* Check if we are close to a coordinate */
                 for (POI poi : pois) {
                     /* Calculate distance */
-                    if (calcDistance(location.getLatitude(), location.getLongitude(), poi.getLat(), poi.getLon()) < 100) {
+                    if (calcDistance(location.getLatitude(), location.getLongitude(), poi.getLat(), poi.getLon()) < poi.getRadius()) {
                         Log.d("Match of: ", poi.getName());
                         onLocationFound(poi);
                     }
