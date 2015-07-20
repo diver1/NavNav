@@ -41,7 +41,15 @@ public class NavActivity extends ActionBarActivity {
             public void onLocationChanged(Location location) {
                 // Called when a new location is found by the network location provider.
                 Log.d("This is tha latitude: ", Double.toString(location.getLatitude()));
-                onLocationFound(location);
+
+                /* Check if we are close to a coordinate */
+                for (POI poi : pois) {
+                    /* Calculate distance */
+                    if (calcDistance(location.getLatitude(), location.getLongitude(), poi.getLat(), poi.getLon()) < 100) {
+                        Log.d("Match of: ", poi.getName());
+                        onLocationFound(poi);
+                    }
+                }
             }
 
             public void onStatusChanged(String provider, int status, Bundle extras) {}
@@ -65,8 +73,6 @@ public class NavActivity extends ActionBarActivity {
         }
         Log.d("This is the name of the first in list ", pois.get(0).getName());
         Log.d("This is the name of the second in list ", pois.get(1).getName());
-
-        //speaker.speak("HEJHEJ");
     }
 
     @Override
@@ -89,6 +95,19 @@ public class NavActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private double calcDistance(double lat1, double lng1, double lat2, double lng2) {
+        /* Calculate distance in meter */
+        double earthRadius = 6371000;
+        double dLat = Math.toRadians(lat2-lat1);
+        double dLng = Math.toRadians(lng2-lng1);
+        double a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2)) *
+                        Math.sin(dLng/2) * Math.sin(dLng/2);
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+
+        return earthRadius * c;
     }
 
     private void checkTTS(){
@@ -123,9 +142,9 @@ public class NavActivity extends ActionBarActivity {
         speaker.speak("Stop the route!");
     }
 
-    public void onLocationFound(Location location) {
+    public void onLocationFound(POI poi) {
         /* Method for action when a matching coordinate is found */
-        routeText.setText("Sundbyberg Municipality (Sundbybergs kommun or Sundbybergs stad) is a municipality in Stockholm County in east central Sweden, just north of the capital Stockholm. Sundbyberg is wholly within the city of Stockholm and has a 100% urban population.");
-        speaker.speak("Sundbyberg Municipality (Sundbybergs kommun or Sundbybergs stad) is a municipality in Stockholm County in east central Sweden, just north of the capital Stockholm. Sundbyberg is wholly within the city of Stockholm and has a 100% urban population.");
+        routeText.setText(poi.getText());
+        speaker.speak(poi.getTts());
     }
 }
