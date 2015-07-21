@@ -71,8 +71,6 @@ public class NavActivity extends ActionBarActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Log.d("This is the name of the first in list ", pois.get(0).getName());
-        Log.d("This is the name of the second in list ", pois.get(1).getName());
     }
 
     @Override

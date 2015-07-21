@@ -1,15 +1,14 @@
 package com.example.simfur.navme;
 
 import android.content.Context;
-import android.media.AudioManager;
 import android.speech.tts.TextToSpeech;
 import java.util.Locale;
 
 public class RobotSpeaker implements TextToSpeech.OnInitListener {
 
-    private TextToSpeech tts;
-    private boolean ready;
-    private boolean allowed;
+    private final TextToSpeech tts;
+    private boolean ready = false;
+    private boolean allowed = false;
 
     @Override
     public void onInit(int status) {

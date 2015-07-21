@@ -9,12 +9,12 @@ import org.xmlpull.v1.XmlPullParserFactory;
 import org.xmlpull.v1.XmlPullParserException;
 
 public class ParseXMLHandler {
-    List<POI> pois;
+    final List<POI> pois;
     private POI poi;
     private String text;
 
     public ParseXMLHandler() {
-        pois = new ArrayList<POI>();
+        pois = new ArrayList<>();
     }
 
     public List<POI> getPOIs() {
