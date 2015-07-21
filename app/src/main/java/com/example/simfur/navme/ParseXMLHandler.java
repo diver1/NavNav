@@ -9,7 +9,7 @@ import org.xmlpull.v1.XmlPullParserFactory;
 import org.xmlpull.v1.XmlPullParserException;
 
 public class ParseXMLHandler {
-    final List<POI> pois;
+    private final List<POI> pois;
     private POI poi;
     private String text;
 
@@ -17,13 +17,9 @@ public class ParseXMLHandler {
         pois = new ArrayList<>();
     }
 
-    public List<POI> getPOIs() {
-        return pois;
-    }
-
     public List<POI> parse(InputStream is) {
-        XmlPullParserFactory factory = null;
-        XmlPullParser parser = null;
+        XmlPullParserFactory factory;
+        XmlPullParser parser;
         try {
             factory = XmlPullParserFactory.newInstance();
             factory.setNamespaceAware(true);
