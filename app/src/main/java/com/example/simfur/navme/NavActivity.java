@@ -21,6 +21,7 @@ public class NavActivity extends ActionBarActivity {
     private TextView routeText;
     private List<POI> pois;
     private RobotSpeaker speaker;
+    private boolean active = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +40,12 @@ public class NavActivity extends ActionBarActivity {
 	    /* Define a listener that responds to location updates */
         LocationListener locationListener = new LocationListener() {
             public void onLocationChanged(Location location) {
+                if (!active) {
+                    /* Return if not active */
+                    Log.d("Route not active!", "");
+                    return;
+                }
+
                 // Called when a new location is found by the network location provider.
                 Log.d("This is tha latitude: ", Double.toString(location.getLatitude()));
 
@@ -131,13 +138,13 @@ public class NavActivity extends ActionBarActivity {
     }
 
     public void startRoute(View v) {
+        this.active = true;
         Log.d("Start the route!", "");
-        speaker.speak("Start the route!");
     }
 
     public void stopRoute(View v) {
+        this.active = false;
         Log.d("Stop the route!", "");
-        speaker.speak("Stop the route!");
     }
 
     public void onLocationFound(POI poi) {
