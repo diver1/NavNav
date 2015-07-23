@@ -66,9 +66,7 @@ public class ParseXMLHandler {
                 }
                 eventType = parser.next();
             }
-        } catch (XmlPullParserException e){
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (XmlPullParserException | IOException e){
             e.printStackTrace();
         }
 
