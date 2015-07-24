@@ -13,11 +13,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 public class NavActivity extends ActionBarActivity {
     /* Private variables */
-    private TextView routeText;
+    private TextView routeTextName;
+    private TextView routeTextInfo;
     private List<POI> pois;
     private RobotSpeaker speaker;
     private boolean active = false;
@@ -30,8 +32,9 @@ public class NavActivity extends ActionBarActivity {
         /* Check TTS status and create a speaker object */
         checkTTS();
 
-        /* Get text view for coordinate information */
-        routeText = (TextView)findViewById(R.id.textView);
+        /* Get text views for coordinate information */
+        routeTextName = (TextView)findViewById(R.id.textViewName);
+        routeTextInfo = (TextView)findViewById(R.id.textViewInfo);
 
         /* Acquire a reference to the system Location Manager */
         LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
@@ -136,19 +139,20 @@ public class NavActivity extends ActionBarActivity {
         }
     }
 
-    public void startRoute() {
+    public void startRoute(View v) {
         this.active = true;
         Log.d("Start the route!", "");
     }
 
-    public void stopRoute() {
+    public void stopRoute(View v) {
         this.active = false;
         Log.d("Stop the route!", "");
     }
 
     public void onLocationFound(POI poi) {
         /* Method for action when a matching coordinate is found */
-        routeText.setText(poi.getText());
+        routeTextInfo.setText(poi.getText());
+        routeTextName.setText(poi.getName());
         speaker.speak(poi.getTts());
     }
 }
