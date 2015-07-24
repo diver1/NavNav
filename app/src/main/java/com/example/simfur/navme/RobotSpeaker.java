@@ -1,6 +1,7 @@
 package com.example.simfur.navme;
 
 import android.content.Context;
+import android.os.Build;
 import android.speech.tts.TextToSpeech;
 import java.util.Locale;
 
@@ -37,20 +38,14 @@ class RobotSpeaker implements TextToSpeech.OnInitListener {
         // Speak only if the TTS is ready
         // and the user has allowed speech
         if(ready && allowed) {
-            //HashMap<String, String> hash = new HashMap<String,String>();
-            //hash.put(TextToSpeech.Engine.KEY_PARAM_STREAM,
-            //        String.valueOf(AudioManager.STREAM_NOTIFICATION));
-            //tts.speak(text, TextToSpeech.QUEUE_ADD, hash);
-            tts.speak(text, TextToSpeech.QUEUE_ADD, null, null);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                tts.speak(text, TextToSpeech.QUEUE_ADD, null, null);
+            } else {
+                //HashMap<String, String> hash = new HashMap<String,String>();
+                //hash.put(TextToSpeech.Engine.KEY_PARAM_STREAM,
+                //        String.valueOf(AudioManager.STREAM_NOTIFICATION));
+                tts.speak(text, TextToSpeech.QUEUE_ADD, null);
+            }
         }
     }
-
-    public void pause(int duration){
-        tts.playSilentUtterance(duration, TextToSpeech.QUEUE_ADD, null);
-    }
-
-    // Free up resources
-//    public void destroy(){
-//        tts.shutdown();
-//    }
 }
