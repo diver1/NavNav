@@ -1,6 +1,6 @@
 package com.example.simfur.navme;
 
-public class POI {
+class POI {
     private double lat;
     private double lon;
     private int radius;

@@ -12,7 +12,6 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
-import android.view.View;
 import android.view.MenuItem;
 import android.widget.TextView;
 
@@ -137,12 +136,12 @@ public class NavActivity extends ActionBarActivity {
         }
     }
 
-    public void startRoute(View v) {
+    public void startRoute() {
         this.active = true;
         Log.d("Start the route!", "");
     }
 
-    public void stopRoute(View v) {
+    public void stopRoute() {
         this.active = false;
         Log.d("Stop the route!", "");
     }

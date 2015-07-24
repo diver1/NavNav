@@ -8,7 +8,7 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 import org.xmlpull.v1.XmlPullParserException;
 
-public class ParseXMLHandler {
+class ParseXMLHandler {
     private final List<POI> pois;
     private POI poi;
     private String text;

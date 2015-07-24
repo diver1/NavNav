@@ -4,7 +4,7 @@ import android.content.Context;
 import android.speech.tts.TextToSpeech;
 import java.util.Locale;
 
-public class RobotSpeaker implements TextToSpeech.OnInitListener {
+class RobotSpeaker implements TextToSpeech.OnInitListener {
 
     private final TextToSpeech tts;
     private boolean ready = false;
