@@ -8,15 +8,15 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.speech.tts.TextToSpeech;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-public class NavActivity extends ActionBarActivity {
+public class NavActivity extends AppCompatActivity {
     /* Private variables */
     private TextView routeTextName;
     private TextView routeTextInfo;
