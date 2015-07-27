@@ -3,9 +3,7 @@ package com.example.simfur.navme;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-/**
- * Created by simfur on 27/07/15.
- */
+
 public class TabsPagerAdapter extends FragmentPagerAdapter {
     public TabsPagerAdapter(FragmentManager fm) {
         super(fm);
@@ -13,14 +11,13 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int index) {
-
         switch (index) {
             case 0:
                 // Top Rated fragment activity
-                //return new TopRatedFragment();
+                return new NavActivity();
             case 1:
                 // Games fragment activity
-                //return new GamesFragment();
+                return new NavActivity();
         }
 
         return null;
