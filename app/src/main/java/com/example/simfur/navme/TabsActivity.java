@@ -12,7 +12,7 @@ import android.view.MenuItem;
 
 
 public class TabsActivity extends FragmentActivity
-        implements ActionBar.TabListener {
+        implements ActionBar.TabListener, routeFragment.OnFragmentInteractionListener {
 
     private ViewPager viewPager;
     private TabsPagerAdapter mAdapter;
@@ -53,5 +53,9 @@ public class TabsActivity extends FragmentActivity
             actionBar.addTab(actionBar.newTab().setText(tab_name)
                     .setTabListener(this));
         }
+    }
+
+    public void onFragmentInteraction(String id){
+        //you can leave it empty
     }
 }

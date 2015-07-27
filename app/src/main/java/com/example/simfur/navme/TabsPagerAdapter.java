@@ -13,13 +13,12 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int index) {
         switch (index) {
             case 0:
-                // Top Rated fragment activity
-                return new NavActivity();
+                // List of routes
+                return new routeFragment();
             case 1:
-                // Games fragment activity
+                // Route player
                 return new NavActivity();
         }
-
         return null;
     }
 
