@@ -15,4 +15,18 @@
         <tts>This is a terrible place to be!</tts>
         <coord lon="1.12574" lat="51.50853" radius="500"/>
     </poi>
+    <poi>
+        <id>3</id>
+        <name>Muggedal</name>
+        <text>Home sweet home!</text>
+        <tts>a nice place to be!</tts>
+        <coord lon="59.026223" lat="12.220406" radius="50"/>
+    </poi>
+    <poi>
+        <id>4</id>
+        <name>Franserud</name>
+        <text>Old school!</text>
+        <tts>Old school, too cool for school!</tts>
+        <coord lon="59.026857" lat="12.223239" radius="50"/>
+    </poi>
 </route>
