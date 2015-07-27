@@ -9,14 +9,17 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.speech.tts.TextToSpeech;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
-public class NavActivity extends AppCompatActivity {
+public class NavActivity extends Fragment {
     /* Private variables */
     private TextView routeTextName;
     private TextView routeTextInfo;
@@ -25,19 +28,14 @@ public class NavActivity extends AppCompatActivity {
     private boolean active = false;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_nav);
 
         /* Check TTS status and create a speaker object */
         checkTTS();
 
-        /* Get text views for coordinate information */
-        routeTextName = (TextView)findViewById(R.id.textViewName);
-        routeTextInfo = (TextView)findViewById(R.id.textViewInfo);
-
         /* Acquire a reference to the system Location Manager */
-        LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+        LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
 
 	    /* Define a listener that responds to location updates */
         LocationListener locationListener = new LocationListener() {
@@ -76,32 +74,22 @@ public class NavActivity extends AppCompatActivity {
         /* Parse the XML */
         try {
             ParseXMLHandler parser = new ParseXMLHandler();
-            pois = parser.parse(getAssets().open("example.xml"));
+            pois = parser.parse(getActivity().getAssets().open("example.xml"));
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_nav, menu);
-        return true;
-    }
+    public View onCreateView(LayoutInflater inflater,
+                             ViewGroup container,
+                             Bundle savedInstanceState) {
+        /* Get text views for coordinate information */
+        View v = inflater.inflate(R.layout.activity_nav, container, false);
+        routeTextName = (TextView)v.findViewById(R.id.textViewName);
+        routeTextInfo = (TextView)v.findViewById(R.id.textViewInfo);
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
+        return v;
     }
 
     private double calcDistance(double lat1, double lng1, double lat2, double lng2) {
@@ -125,11 +113,11 @@ public class NavActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         // If no TTS is available, tell the user to install one
         if(requestCode == 0x1){
             if(resultCode == TextToSpeech.Engine.CHECK_VOICE_DATA_PASS){
-                speaker = new RobotSpeaker(this);
+                speaker = new RobotSpeaker(this.getActivity());
                 speaker.allow(true);
             }else {
                 Intent install = new Intent();
