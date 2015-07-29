@@ -7,6 +7,4 @@
     <string name="start_button">Start</string>
     <string name="stop_button">Stop</string>
     <string name="title_activity_tabs">TabsActivity</string>
-
-    <string name="hello_world">Hello world!</string>
 </resources>

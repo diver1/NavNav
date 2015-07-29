@@ -26,9 +26,6 @@ public class NavActivity extends Fragment {
     private RobotSpeaker speaker;
     private boolean active = false;
 
-    private Button buttonStart;
-    private Button buttonStop;
-
     private routeFragment.OnFragmentInteractionListener mListener;
 
     @Override
@@ -95,21 +92,21 @@ public class NavActivity extends Fragment {
 
         /* Create and add a onclicklistener programatically since this button only shall
          * be used in the fragment and not in the entire activity */
-        buttonStart = (Button) v.findViewById(R.id.button);
+        Button buttonStart = (Button) v.findViewById(R.id.button);
         buttonStart.setOnClickListener(startClickListener);
-        buttonStop = (Button) v.findViewById(R.id.button2);
+        Button buttonStop = (Button) v.findViewById(R.id.button2);
         buttonStop.setOnClickListener(stopClickListener);
 
         return v;
     }
 
-    private View.OnClickListener startClickListener = new View.OnClickListener() {
+    private final View.OnClickListener startClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             startRoute(v);
         }
     };
-    private View.OnClickListener stopClickListener = new View.OnClickListener() {
+    private final View.OnClickListener stopClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             stopRoute(v);
@@ -145,7 +142,7 @@ public class NavActivity extends Fragment {
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        public void onFragmentInteraction(String id);
+        void onFragmentInteraction(String id);
     }
 
     private double calcDistance(double lat1, double lng1, double lat2, double lng2) {
@@ -183,17 +180,17 @@ public class NavActivity extends Fragment {
         }
     }
 
-    public void startRoute(View v) {
+    private void startRoute(View v) {
         this.active = true;
         Log.d("Start the route!", "");
     }
 
-    public void stopRoute(View v) {
+    private void stopRoute(View v) {
         this.active = false;
         Log.d("Stop the route!", "");
     }
 
-    public void onLocationFound(POI poi) {
+    private void onLocationFound(POI poi) {
         /* Method for action when a matching coordinate is found */
         routeTextInfo.setText(poi.getText());
         routeTextName.setText(poi.getName());

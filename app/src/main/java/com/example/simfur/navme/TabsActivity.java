@@ -10,9 +10,7 @@ public class TabsActivity extends FragmentActivity
         implements ActionBar.TabListener, routeFragment.OnFragmentInteractionListener {
 
     private ViewPager viewPager;
-    private TabsPagerAdapter mAdapter;
-    private ActionBar actionBar;
-    private String[] tabs = {"Route List", "Navigate"};
+    private final String[] tabs = {"Route List", "Navigate"};
 
     @Override
     public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
@@ -36,8 +34,8 @@ public class TabsActivity extends FragmentActivity
 
         // Initilization
         viewPager = (ViewPager) findViewById(R.id.pager);
-        actionBar = getActionBar();
-        mAdapter = new TabsPagerAdapter(getSupportFragmentManager());
+        ActionBar actionBar = getActionBar();
+        TabsPagerAdapter mAdapter = new TabsPagerAdapter(getSupportFragmentManager());
 
         viewPager.setAdapter(mAdapter);
         actionBar.setHomeButtonEnabled(false);
