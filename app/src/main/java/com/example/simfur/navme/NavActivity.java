@@ -2,6 +2,7 @@ package com.example.simfur.navme;
 
 import java.util.List;
 import java.io.IOException;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
@@ -14,6 +15,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class NavActivity extends Fragment {
@@ -23,6 +25,11 @@ public class NavActivity extends Fragment {
     private List<POI> pois;
     private RobotSpeaker speaker;
     private boolean active = false;
+
+    private Button buttonStart;
+    private Button buttonStop;
+
+    private routeFragment.OnFragmentInteractionListener mListener;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -86,7 +93,59 @@ public class NavActivity extends Fragment {
         routeTextName = (TextView)v.findViewById(R.id.textViewName);
         routeTextInfo = (TextView)v.findViewById(R.id.textViewInfo);
 
+        /* Create and add a onclicklistener programatically since this button only shall
+         * be used in the fragment and not in the entire activity */
+        buttonStart = (Button) v.findViewById(R.id.button);
+        buttonStart.setOnClickListener(startClickListener);
+        buttonStop = (Button) v.findViewById(R.id.button2);
+        buttonStop.setOnClickListener(stopClickListener);
+
         return v;
+    }
+
+    private View.OnClickListener startClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            startRoute(v);
+        }
+    };
+    private View.OnClickListener stopClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            stopRoute(v);
+        }
+    };
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        try {
+            mListener = (routeFragment.OnFragmentInteractionListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement OnFragmentInteractionListener");
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
+
+    /**
+     * This interface must be implemented by activities that contain this
+     * fragment to allow an interaction in this fragment to be communicated
+     * to the activity and potentially other fragments contained in that
+     * activity.
+     * <p/>
+     * See the Android Training lesson <a href=
+     * "http://developer.android.com/training/basics/fragments/communicating.html"
+     * >Communicating with Other Fragments</a> for more information.
+     */
+    public interface OnFragmentInteractionListener {
+        // TODO: Update argument type and name
+        public void onFragmentInteraction(String id);
     }
 
     private double calcDistance(double lat1, double lng1, double lat2, double lng2) {
