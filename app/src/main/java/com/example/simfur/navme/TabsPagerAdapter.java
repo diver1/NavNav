@@ -14,10 +14,10 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
         switch (index) {
             case 0:
                 // List of routes
-                return new routeFragment();
+                return new RouteListFragment();
             case 1:
                 // Route player
-                return new NavActivity();
+                return new NavFragment();
         }
         return null;
     }

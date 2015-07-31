@@ -7,7 +7,7 @@ import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 
 public class TabsActivity extends FragmentActivity
-        implements ActionBar.TabListener, routeFragment.OnFragmentInteractionListener {
+        implements ActionBar.TabListener, RouteListFragment.OnFragmentInteractionListener {
 
     private ViewPager viewPager;
     private final String[] tabs = {"Route List", "Navigate"};

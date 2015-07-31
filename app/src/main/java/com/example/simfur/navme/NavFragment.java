@@ -18,7 +18,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class NavActivity extends Fragment {
+public class NavFragment extends Fragment {
     /* Private variables */
     private TextView routeTextName;
     private TextView routeTextInfo;
@@ -26,7 +26,7 @@ public class NavActivity extends Fragment {
     private RobotSpeaker speaker;
     private boolean active = false;
 
-    private routeFragment.OnFragmentInteractionListener mListener;
+    private RouteListFragment.OnFragmentInteractionListener mListener;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -86,7 +86,7 @@ public class NavActivity extends Fragment {
                              ViewGroup container,
                              Bundle savedInstanceState) {
         /* Get text views for coordinate information */
-        View v = inflater.inflate(R.layout.activity_nav, container, false);
+        View v = inflater.inflate(R.layout.fragment_nav, container, false);
         routeTextName = (TextView)v.findViewById(R.id.textViewName);
         routeTextInfo = (TextView)v.findViewById(R.id.textViewInfo);
 
@@ -117,7 +117,7 @@ public class NavActivity extends Fragment {
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         try {
-            mListener = (routeFragment.OnFragmentInteractionListener) activity;
+            mListener = (RouteListFragment.OnFragmentInteractionListener) activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
                     + " must implement OnFragmentInteractionListener");
