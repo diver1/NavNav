@@ -75,7 +75,7 @@ public class NavFragment extends Fragment {
         /* Parse the XML */
         try {
             ParseXMLHandler parser = new ParseXMLHandler();
-            pois = parser.parse(getActivity().getAssets().open("example.xml"));
+            pois = parser.parse(getActivity().getAssets().open("routes/example.xml"));
         } catch (IOException e) {
             e.printStackTrace();
         }
