@@ -1,10 +1,8 @@
 package com.example.simfur.navme;
 
 import android.app.Activity;
-import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +12,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
-
-import com.example.simfur.navme.dummy.DummyContent;
 
 import java.io.IOException;
 
@@ -38,8 +34,6 @@ public class RouteListFragment extends Fragment implements AbsListView.OnItemCli
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
-    String fileList[];
 
     private OnFragmentInteractionListener mListener;
 
@@ -82,7 +76,7 @@ public class RouteListFragment extends Fragment implements AbsListView.OnItemCli
 
         // TODO: Change Adapter to display your content
         mAdapter = new ArrayAdapter<>(getActivity(),
-                android.R.layout.simple_list_item_1, android.R.id.text1, DummyContent.ITEMS);
+                android.R.layout.simple_list_item_1, android.R.id.text1, RouteFileList.ITEMS);
     }
 
     @Override
@@ -97,17 +91,8 @@ public class RouteListFragment extends Fragment implements AbsListView.OnItemCli
         // Set OnItemClickListener so we can be notified on item clicks
         mListView.setOnItemClickListener(this);
 
-        // Create a list of all files in assets/routes
-        try {
-            fileList = getActivity().getAssets().list("routes");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        if (fileList != null) {
-            for ( int i = 0;i<fileList.length;i++) {
-                Log.d("### ", fileList[i]);
-            }
-        }
+        // Populate the list of files
+        RouteFileList.populate(getActivity());
 
         return view;
     }
@@ -134,7 +119,7 @@ public class RouteListFragment extends Fragment implements AbsListView.OnItemCli
         if (null != mListener) {
             // Notify the active callbacks interface (the activity, if the
             // fragment is attached to one) that an item has been selected.
-            mListener.onFragmentInteraction(DummyContent.ITEMS.get(position).id);
+            mListener.onFragmentInteraction(RouteFileList.ITEMS.get(position).id);
         }
     }
 
