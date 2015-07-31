@@ -1,8 +1,10 @@
 package com.example.simfur.navme;
 
 import android.app.Activity;
+import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +16,8 @@ import android.widget.TextView;
 
 
 import com.example.simfur.navme.dummy.DummyContent;
+
+import java.io.IOException;
 
 /**
  * A fragment representing a list of Items.
@@ -34,6 +38,8 @@ public class RouteListFragment extends Fragment implements AbsListView.OnItemCli
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    String fileList[];
 
     private OnFragmentInteractionListener mListener;
 
@@ -90,6 +96,18 @@ public class RouteListFragment extends Fragment implements AbsListView.OnItemCli
 
         // Set OnItemClickListener so we can be notified on item clicks
         mListView.setOnItemClickListener(this);
+
+        // Create a list of all files in assets/routes
+        try {
+            fileList = getActivity().getAssets().list("routes");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (fileList != null) {
+            for ( int i = 0;i<fileList.length;i++) {
+                Log.d("### ", fileList[i]);
+            }
+        }
 
         return view;
     }
