@@ -49,6 +49,7 @@ public class TabsActivity extends FragmentActivity
     }
 
     public void onFragmentInteraction(String id){
-        //you can leave it empty
+        // Switch to route tab
+        getActionBar().setSelectedNavigationItem(1);
     }
 }
