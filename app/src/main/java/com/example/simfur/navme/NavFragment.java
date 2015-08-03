@@ -48,15 +48,26 @@ public class NavFragment extends Fragment {
                 }
 
                 // Called when a new location is found by the network location provider.
-                Log.d("This is tha latitude: ", Double.toString(location.getLatitude()));
+                Log.d("This is the latitude: ", Double.toString(location.getLatitude()));
+                Log.d("This is the longitude: ", Double.toString(location.getLongitude()));
 
                 /* Check if we are close to a coordinate */
-                for (POI poi : pois) {
-                    /* Calculate distance */
-                    if (calcDistance(location.getLatitude(), location.getLongitude(), poi.getLat(), poi.getLon()) < poi.getRadius()) {
-                        Log.d("Match of: ", poi.getName());
-                        onLocationFound(poi);
+                try {
+                    for (POI poi : pois) {
+                        float [] dist = new float[1];
+                        float [] dist_test = new float[1];
+                        Location.distanceBetween(location.getLatitude(), location.getLongitude(), poi.getLat(), poi.getLon(), dist);
+                        Log.d("Check of coord: ", poi.getName());
+                        Log.d("Distance between: ", Float.toString(dist[0]));
+
+                        /* Calculate distance */
+                        if (dist[0] < poi.getRadius()) {
+                            Log.d("Match of: ", poi.getName());
+                            onLocationFound(poi);
+                        }
                     }
+                } catch (NullPointerException e) {
+                    Log.d("No route is loaded", "");
                 }
             }
 
@@ -71,14 +82,6 @@ public class NavFragment extends Fragment {
 	     * to receive location updates */
         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
-
-        /* Parse the XML */
-        try {
-            ParseXMLHandler parser = new ParseXMLHandler();
-            pois = parser.parse(getActivity().getAssets().open("routes/example.xml"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     @Override
@@ -195,5 +198,17 @@ public class NavFragment extends Fragment {
         routeTextInfo.setText(poi.getText());
         routeTextName.setText(poi.getName());
         speaker.speak(poi.getTts());
+    }
+
+    public void routeSelected(Activity a, String file) {
+        /* Parse the XML */
+        if (file != null) {
+            try {
+                ParseXMLHandler parser = new ParseXMLHandler();
+                this.pois = parser.parse(a.getAssets().open("routes/" + file));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

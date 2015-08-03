@@ -11,6 +11,7 @@ public class TabsActivity extends FragmentActivity
 
     private ViewPager viewPager;
     private final String[] tabs = {"Route List", "Navigate"};
+    TabsPagerAdapter mAdapter;
 
     @Override
     public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
@@ -35,7 +36,7 @@ public class TabsActivity extends FragmentActivity
         // Initilization
         viewPager = (ViewPager) findViewById(R.id.pager);
         ActionBar actionBar = getActionBar();
-        TabsPagerAdapter mAdapter = new TabsPagerAdapter(getSupportFragmentManager());
+        mAdapter = new TabsPagerAdapter(getSupportFragmentManager());
 
         viewPager.setAdapter(mAdapter);
         actionBar.setHomeButtonEnabled(false);
@@ -48,8 +49,9 @@ public class TabsActivity extends FragmentActivity
         }
     }
 
-    public void onFragmentInteraction(String id){
-        // Switch to route tab
+    public void onFragmentInteraction(String filename){
+        /* Switch to route tab and send string with file name */
         getActionBar().setSelectedNavigationItem(1);
+        ((NavFragment)(mAdapter.getFragment(1))).routeSelected(this, filename);
     }
 }
