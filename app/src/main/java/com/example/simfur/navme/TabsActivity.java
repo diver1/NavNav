@@ -11,7 +11,7 @@ public class TabsActivity extends FragmentActivity
 
     private ViewPager viewPager;
     private final String[] tabs = {"Route List", "Navigate"};
-    TabsPagerAdapter mAdapter;
+    private TabsPagerAdapter mAdapter;
 
     @Override
     public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {

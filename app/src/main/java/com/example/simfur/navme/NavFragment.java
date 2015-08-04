@@ -55,7 +55,6 @@ public class NavFragment extends Fragment {
                 try {
                     for (POI poi : pois) {
                         float [] dist = new float[1];
-                        float [] dist_test = new float[1];
                         Location.distanceBetween(location.getLatitude(), location.getLongitude(), poi.getLat(), poi.getLon(), dist);
                         Log.d("Check of coord: ", poi.getName());
                         Log.d("Distance between: ", Float.toString(dist[0]));

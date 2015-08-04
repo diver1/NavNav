@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.HashMap;
 
 public class TabsPagerAdapter extends FragmentPagerAdapter {
-    private Map<Integer, Fragment> mPageReferenceMap = new HashMap<Integer, Fragment>();
+    private final Map<Integer, Fragment> mPageReferenceMap = new HashMap<>();
 
     public TabsPagerAdapter(FragmentManager fm) {
         super(fm);

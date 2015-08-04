@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class RouteFileList {
     public static List<RouteFile> ITEMS = new ArrayList<>();
-    public static Map<String, RouteFile> ITEM_MAP = new HashMap<>();
+    private static Map<String, RouteFile> ITEM_MAP = new HashMap<>();
 
     private static void addItem(RouteFile item) {
         ITEMS.add(item);
@@ -32,8 +32,8 @@ public class RouteFileList {
     }
 
     public static class RouteFile {
-        public String id;
-        public String content;
+        public final String id;
+        public final String content;
 
         public RouteFile(String id, String content) {
             this.id = id;
