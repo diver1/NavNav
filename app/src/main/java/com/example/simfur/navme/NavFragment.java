@@ -28,6 +28,8 @@ public class NavFragment extends Fragment {
 
     private RouteListFragment.OnFragmentInteractionListener mListener;
 
+    Button buttonToggle;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,10 +96,8 @@ public class NavFragment extends Fragment {
 
         /* Create and add a onclicklistener programatically since this button only shall
          * be used in the fragment and not in the entire activity */
-        Button buttonStart = (Button) v.findViewById(R.id.button);
-        buttonStart.setOnClickListener(startClickListener);
-        Button buttonStop = (Button) v.findViewById(R.id.button2);
-        buttonStop.setOnClickListener(stopClickListener);
+        buttonToggle = (Button) v.findViewById(R.id.button);
+        buttonToggle.setOnClickListener(startClickListener);
 
         return v;
     }
@@ -106,12 +106,6 @@ public class NavFragment extends Fragment {
         @Override
         public void onClick(View v) {
             startRoute(v);
-        }
-    };
-    private final View.OnClickListener stopClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            stopRoute(v);
         }
     };
 
@@ -170,13 +164,16 @@ public class NavFragment extends Fragment {
     }
 
     private void startRoute(View v) {
-        this.active = true;
-        Log.d("Start the route!", "");
-    }
-
-    private void stopRoute(View v) {
-        this.active = false;
-        Log.d("Stop the route!", "");
+        /* Toggle active */
+        if (this.active) {
+            this.active = false;
+            buttonToggle.setText("Start");
+        }
+        else {
+            this.active = true;
+            buttonToggle.setText("Stop");
+        }
+        Log.d("Start/Stop the route!", "");
     }
 
     private void onLocationFound(POI poi) {
