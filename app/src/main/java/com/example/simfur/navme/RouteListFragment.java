@@ -16,11 +16,6 @@ public class RouteListFragment extends Fragment implements AbsListView.OnItemCli
     private OnFragmentInteractionListener mListener;
 
     /**
-     * The fragment's ListView/GridView.
-     */
-    private AbsListView mListView;
-
-    /**
      * The Adapter which will be used to populate the ListView/GridView with
      * Views.
      */
@@ -47,8 +42,7 @@ public class RouteListFragment extends Fragment implements AbsListView.OnItemCli
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_route, container, false);
 
-        // Set the adapter
-        mListView = (AbsListView) view.findViewById(android.R.id.list);
+        AbsListView mListView = (AbsListView) view.findViewById(android.R.id.list);
         mListView.setAdapter(mAdapter);
 
         // Set OnItemClickListener so we can be notified on item clicks

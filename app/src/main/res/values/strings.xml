@@ -2,7 +2,6 @@
     <string name="app_name">navMe</string>
     <string name="poi_name_default">Name</string>
     <string name="poi_text_default">Text</string>
-    <string name="start_button">Start</string>
-    <string name="stop_button">Stop</string>
+    <string name="toggle_button">Start</string>
     <string name="title_activity_tabs">TabsActivity</string>
 </resources>
