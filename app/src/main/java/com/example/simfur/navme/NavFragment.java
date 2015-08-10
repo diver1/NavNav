@@ -104,9 +104,8 @@ public class NavFragment extends Fragment {
 
         /* Create a popupwindow to be used when a matching poi is found */
         popupPoi = new PopupWindow(inflater.inflate(R.layout.popup_poi, null),
-                500,
-                500,
-                true);
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT);
 
         return v;
     }
