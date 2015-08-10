@@ -12,10 +12,12 @@ import android.speech.tts.TextToSpeech;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 public class NavFragment extends Fragment {
@@ -29,6 +31,7 @@ public class NavFragment extends Fragment {
     private RouteListFragment.OnFragmentInteractionListener mListener;
 
     Button buttonToggle;
+    PopupWindow popupPoi;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -91,13 +94,19 @@ public class NavFragment extends Fragment {
                              Bundle savedInstanceState) {
         /* Get text views for coordinate information */
         View v = inflater.inflate(R.layout.fragment_nav, container, false);
-        routeTextName = (TextView)v.findViewById(R.id.textViewName);
-        routeTextInfo = (TextView)v.findViewById(R.id.textViewInfo);
+        routeTextName = (TextView)v.findViewById(R.id.textViewNameOld);
+        routeTextInfo = (TextView)v.findViewById(R.id.textViewInfoOld);
 
         /* Create and add a onclicklistener programatically since this button only shall
          * be used in the fragment and not in the entire activity */
         buttonToggle = (Button) v.findViewById(R.id.button);
         buttonToggle.setOnClickListener(startClickListener);
+
+        /* Create a popupwindow to be used when a matching poi is found */
+        popupPoi = new PopupWindow(inflater.inflate(R.layout.popup_poi, null),
+                500,
+                500,
+                true);
 
         return v;
     }
@@ -181,6 +190,10 @@ public class NavFragment extends Fragment {
         routeTextInfo.setText(poi.getText());
         routeTextName.setText(poi.getName());
         speaker.speak(poi.getTts());
+
+        popupPoi.showAtLocation(getActivity().findViewById(R.id.textViewNameOld), Gravity.NO_GRAVITY , 0, 0);
+        popupPoi.update();
+
     }
 
     public void routeSelected(Activity a, String file) {
