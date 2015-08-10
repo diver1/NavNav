@@ -8,6 +8,7 @@ class POI {
     private String text;
     private String tts;
     private int id;
+    private boolean consumed = false;
 
     public void setName(String name) {this.name = name; }
     public String getName() { return this.name; }
@@ -29,4 +30,7 @@ class POI {
 
     public void setRadius(int radius) { this.radius = radius; }
     public double getRadius() { return this.radius; }
+
+    public void consume() { this.consumed = true; }
+    public boolean isConsumed() { return this.consumed; }
 }

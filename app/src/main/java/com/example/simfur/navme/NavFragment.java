@@ -64,7 +64,12 @@ public class NavFragment extends Fragment {
                         /* Calculate distance */
                         if (dist[0] < poi.getRadius()) {
                             Log.d("Match of: ", poi.getName());
-                            onLocationFound(poi);
+                            /* Matching coordinate found */
+                            if (poi.isConsumed() == false) {
+                                onLocationFound(poi);
+                                /* Set this poi to consumed */
+                                poi.consume();
+                            }
                         }
                     }
                 } catch (NullPointerException e) {
