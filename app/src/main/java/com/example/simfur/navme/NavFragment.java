@@ -5,7 +5,8 @@ import java.io.IOException;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.BitmapDrawable;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -105,7 +106,8 @@ public class NavFragment extends Fragment {
         popupPoi = new PopupWindow(inflater.inflate(R.layout.popup_poi, null),
                 ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT);
-        popupPoi.setBackgroundDrawable(new BitmapDrawable());
+        popupPoi.setBackgroundDrawable(new ColorDrawable(Color.WHITE));
+        popupPoi.setElevation(30);
         popupPoi.setOutsideTouchable(true);
         routeTextName = ((TextView)popupPoi.getContentView().findViewById(R.id.textViewName));
         routeTextInfo = ((TextView)popupPoi.getContentView().findViewById(R.id.textViewInfo));
