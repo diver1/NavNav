@@ -180,7 +180,7 @@ public class NavFragment extends Fragment {
         routeTextName.setText(poi.getName());
         speaker.speak(poi.getTts());
 
-        popupPoi.showAtLocation(getActivity().findViewById(R.id.textViewNameOld), Gravity.CENTER , 0, 0);
+        popupPoi.showAtLocation(getActivity().findViewById(R.id.main_nav_fragment), Gravity.CENTER , 0, 0);
         popupPoi.update();
     }
 
