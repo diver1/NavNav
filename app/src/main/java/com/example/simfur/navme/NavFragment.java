@@ -94,8 +94,6 @@ public class NavFragment extends Fragment {
                              Bundle savedInstanceState) {
         /* Get text views for coordinate information */
         View v = inflater.inflate(R.layout.fragment_nav, container, false);
-        routeTextName = (TextView)v.findViewById(R.id.textViewNameOld);
-        routeTextInfo = (TextView)v.findViewById(R.id.textViewInfoOld);
 
         /* Create and add a onclicklistener programatically since this button only shall
          * be used in the fragment and not in the entire activity */
@@ -106,6 +104,8 @@ public class NavFragment extends Fragment {
         popupPoi = new PopupWindow(inflater.inflate(R.layout.popup_poi, null),
                 ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT);
+        routeTextName = ((TextView)popupPoi.getContentView().findViewById(R.id.textViewName));
+        routeTextInfo = ((TextView)popupPoi.getContentView().findViewById(R.id.textViewInfo));
 
         return v;
     }
