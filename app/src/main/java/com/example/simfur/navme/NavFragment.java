@@ -5,6 +5,8 @@ import java.io.IOException;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -12,10 +14,12 @@ import android.speech.tts.TextToSpeech;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 public class NavFragment extends Fragment {
@@ -29,6 +33,7 @@ public class NavFragment extends Fragment {
     private RouteListFragment.OnFragmentInteractionListener mListener;
 
     Button buttonToggle;
+    PopupWindow popupPoi;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -96,13 +101,21 @@ public class NavFragment extends Fragment {
                              Bundle savedInstanceState) {
         /* Get text views for coordinate information */
         View v = inflater.inflate(R.layout.fragment_nav, container, false);
-        routeTextName = (TextView)v.findViewById(R.id.textViewName);
-        routeTextInfo = (TextView)v.findViewById(R.id.textViewInfo);
 
         /* Create and add a onclicklistener programatically since this button only shall
          * be used in the fragment and not in the entire activity */
         buttonToggle = (Button) v.findViewById(R.id.button);
         buttonToggle.setOnClickListener(startClickListener);
+
+        /* Create a popupwindow to be used when a matching poi is found */
+        popupPoi = new PopupWindow(inflater.inflate(R.layout.popup_poi, null),
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT);
+        popupPoi.setBackgroundDrawable(new ColorDrawable(Color.WHITE));
+        popupPoi.setElevation(30);
+        popupPoi.setOutsideTouchable(true);
+        routeTextName = ((TextView)popupPoi.getContentView().findViewById(R.id.textViewName));
+        routeTextInfo = ((TextView)popupPoi.getContentView().findViewById(R.id.textViewInfo));
 
         return v;
     }
@@ -129,21 +142,6 @@ public class NavFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
-    }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(String id);
     }
 
     private void checkTTS(){
@@ -186,6 +184,9 @@ public class NavFragment extends Fragment {
         routeTextInfo.setText(poi.getText());
         routeTextName.setText(poi.getName());
         speaker.speak(poi.getTts());
+
+        popupPoi.showAtLocation(getActivity().findViewById(R.id.main_nav_fragment), Gravity.CENTER , 0, 0);
+        popupPoi.update();
     }
 
     public void routeSelected(Activity a, String file) {
